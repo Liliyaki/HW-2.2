@@ -1,12 +1,19 @@
 package org.skypro.skyshop.model.search;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.UUID;
 
-public interface Searchable  {
+public interface Searchable {
     String getSearchTerm();
+
     String getContentType();
+
     String getProductName();
+
     UUID getId();
+
+    @JsonIgnore
     default String getStringRepresentation() {
         return getProductName() + getContentType();
     }
