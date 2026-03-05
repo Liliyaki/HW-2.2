@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+import static java.util.UUID.randomUUID;
+
 @Service
 public class StorageService {
     private final Map<UUID, Product> productStorage;
@@ -18,6 +20,7 @@ public class StorageService {
     public StorageService() {
         this.productStorage = new HashMap<>();
         this.articleStorage = new HashMap<>();
+        testData();
     }
     public  Collection<Product> allProducts(){
         return productStorage.values();
@@ -32,15 +35,15 @@ public class StorageService {
         return searchables;
     }
     private void testData(){
-        Product juice = new DiscountedProduct(UUID.randomUUID(),"Сок",250,70);
-        Product chicken = new SimpleProduct(UUID.randomUUID(),"курица",500);
-        Product potato = new DiscountedProduct(UUID.randomUUID(),"картошка",150,20);
-        Product eggs = new DiscountedProduct(UUID.randomUUID(),"яйца", 150,10);
-        Product lemonade = new FixPriceProduct(UUID.randomUUID(),"лимонад");
-        Product tomato = new FixPriceProduct(UUID.randomUUID(),"помиджоры");
-        Article articleJuice = new Article(UUID.randomUUID(),"Магазинный сок: Польза или вред?", "В соке содержится много сахара, но также...");
-        Article articleChicken = new Article(UUID.randomUUID(), "Курица как источник белка", "Не все части курицы имеют одинаковое КБЖУ...");
-        Article articleTomato = new Article(UUID.randomUUID(), "Помидоры как источник клетчатки", "Помидоры действительно содержат в себе клетчатку, но...");
+        Product juice = new DiscountedProduct(randomUUID(),"Сок",250,70);
+        Product chicken = new SimpleProduct(randomUUID(),"курица",500);
+        Product potato = new DiscountedProduct(randomUUID(),"картошка",150,20);
+        Product eggs = new DiscountedProduct(randomUUID(),"яйца", 150,10);
+        Product lemonade = new FixPriceProduct(randomUUID(),"лимонад");
+        Product tomato = new FixPriceProduct(randomUUID(),"помидоры");
+        Article articleJuice = new Article(randomUUID(),"Магазинный сок: Польза или вред?", "В соке содержится много сахара, но также...");
+        Article articleChicken = new Article(randomUUID(), "Курица как источник белка", "Не все части курицы имеют одинаковое КБЖУ...");
+        Article articleTomato = new Article(randomUUID(), "Помидоры как источник клетчатки", "Помидоры действительно содержат в себе клетчатку, но...");
         productStorage.put(juice.getId(),juice);
         productStorage.put(chicken.getId(),chicken);
         productStorage.put(potato.getId(),potato);
