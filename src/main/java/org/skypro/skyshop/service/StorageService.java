@@ -34,6 +34,9 @@ public class StorageService {
         searchables.addAll(articleStorage.values());
         return searchables;
     }
+    public Optional<Product> getProductById(UUID id) {
+        return Optional.ofNullable(productStorage.get(id));
+    }
     private void testData(){
         Product juice = new DiscountedProduct(randomUUID(),"Сок",250,70);
         Product chicken = new SimpleProduct(randomUUID(),"курица",500);
