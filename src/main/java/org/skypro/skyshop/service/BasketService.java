@@ -19,33 +19,25 @@ public class BasketService {
     }
 
     public void addProductToBasket(UUID id) {
-        Optional<Product> productOptional = storageService.getProductById(id);
-
-        if (productOptional.isEmpty()) {
-            throw new IllegalArgumentException("Продукт с id " + id + " не найден");
-        }
+        storageService.getProductById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Продукт с id " + id + " не найден"));
         productBasket.add(id);
     }
 
     public UserBasket getUserBasket() {
-
         Map<UUID, Integer> basketItems = productBasket.getProducts();
 
-
         List<BasketItem> items = basketItems.entrySet().stream()
-
                 .map(entry -> {
                     UUID productId = entry.getKey();
                     int quantity = entry.getValue();
-
-
                     Product product = storageService.getProductById(productId)
-                            .orElseThrow(() -> new IllegalStateException("Продукт не найден в хранилище"));
+                            .orElseThrow(() -> new IllegalStateException(
+                                    "Продукт с id " + productId + " не найден."));
 
                     return new BasketItem(product, quantity);
                 })
                 .toList();
-
 
         return new UserBasket(items);
     }

@@ -10,7 +10,8 @@ import java.util.*;
 public class ProductBasket {
     private final Map <UUID,Integer> products = new HashMap<>();
     public void add (UUID id) {
-        products.merge(id, 1, Integer::sum);
+        products.computeIfAbsent(id, key -> 0);
+        products.computeIfPresent(id, (key, value) -> value + 1);
     }
     public Map <UUID, Integer> getProducts(){
         return Collections.unmodifiableMap(products);
