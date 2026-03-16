@@ -1,5 +1,7 @@
 package org.skypro.skyshop.model.product;
 
+import org.skypro.skyshop.exception.NoSuchProductException;
+
 import java.util.UUID;
 
 public class DiscountedProduct extends Product {
@@ -9,7 +11,7 @@ public class DiscountedProduct extends Product {
     public DiscountedProduct(UUID id, String productName, int basedPrice, int discount) {
         super(id, productName);
         if (basedPrice < 0 ){
-            throw new IllegalArgumentException("Базовая цена должна быть больше 0");
+            throw new NoSuchProductException("Базовая цена должна быть больше 0");
         }
         if (discount < 0 || discount > 100) {
             throw new IllegalArgumentException("Скидка должна быть в диапазоне от 0 до 100 включительно");
